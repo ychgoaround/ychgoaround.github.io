@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DatasetNeRF: Efficient 3D-aware Data Factory with Generative Radiance Fields">
+  <meta name="keywords" content="Generative NeRF, Generative Vision">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DatasetNeRF: Efficient 3D-aware Data Factory with Generative Radiance Fields</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://ychgoaround.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://ychgoaround.github.io/projects/DatasetNeRF">
+            DatasetNeRF
+          </a>
+          <!-- <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">DatasetNeRF: Efficient 3D-aware Data Factory with Generative Radiance Fields</h1>
+            <h3 class="subtitle is-2"><b><i>ECCV 2024</i></b></h3>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ychgoaround.github.io">Yu Chi</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://fnzhan.com/">Fangneng Zhan</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/Sibo2rr">Sibo Wu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.mpi-inf.mpg.de/~theobalt/">Christian Theobalt</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://gvrl.mpi-inf.mpg.de/">Adam Kortylewski</a><sup>2,3</sup>,
+            </span>
+            <!-- <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+            </span>
+          </div> -->
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Technical University of Munich</span>
+            <span class="author-block"><sup>2</sup>Max Planck Institute for Informatics</span>
+            <span class="author-block"><sup>3</sup>University of Freiburg</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2311.12063"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2311.12063"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="Code Coming Soon"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://drive.google.com/drive/u/2/folders/16PoA_x6RObpZfEdoeaBAg5X-1ymjNASp"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="teaser-figure" class="teaser-figure">
+        <img src="./static/images/Picture1.png" alt="Teaser Figure" height="100%">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce DatasetNeRF, an efficient 3D-aware data factory with minimal 2D human annotations based on generative radiance fields. Our 3D-aware Data Factory is adept at creating extensive datasets, delivering high-quality, 3D-consistent, fine-grained semantic segmentations, and 3D point cloud part segmentations.
+          </p>
+          <p>
+            This is accomplished by training a semantic branch on a pre-trained 3D GAN, such as EG3D, 
+            leveraging the semantic features in the generator's backbone to enhance the feature tri-plane for semantic volumetric rendering. 
+            To improve the 3D consistency of our segmentations, we incorporate a density prior from the pre-trained EG3D model into the semantic volumetric rendering process. 
+            We further exploit the depth prior from the pre-trained model, efficiently back-projecting the semantic output to obtain 3D point cloud part segmentation. 
+            Our approach facilitates easy manipulation of viewpoints, allowing us to render semantically consistent masks across multiple views. 
+            By merging the back-projected point cloud part segmentations from different perspectives, we can achieve comprehensive point cloud part segmentation of the entire 3D representation. 
+            Remarkably, our process for generating this vast array of 3D-aware data requires only a limited set of 2D data for training.
+          </p>
+          <p>
+            We evaluate our approach on the AFHQ-cat, FFHQ, AIST++ dataset and Nersemble dataset. We generate detailed annotations for these datasets, showing our method outperforms existing baselines by enhancing 3D consistency across video sequences and improving segmentation accuracy for single images. 
+            Additionally, we demonstrate that our method is also seamlessly compatible with articulated generative radiance fields on AIST++ dataset. 
+            In addition, we qualitatively demonstrate that models trained with our generated dataset can generalize well to real-world scans, such as those in the Nersemble dataset.
+            We also augment the point cloud semantic part segmentation benchmark dataset using our method, with a specific focus on the ShapeNet-Car dataset. Our work further analyzes potential applications like 3D-aware semantic editing and 3D inversion, demonstrating that the ability to generate infinite 3D-aware data from a limited number of 2D labeled annotations paves the way for numerous 2D and 3D downstream applications.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-3">Overview</h2>
+    <div class="content has-text-justified">
+      <!-- <p>
+          4D Reconstruction from Partial Scans.
+        </p> -->
+    </div>
+
+
+    <img src="./static/images/archv3.jpg" style="width:100%; margin-right:auto; margin-left:auto; margin-top:auto;">
+
+    <div class="content has-text-justified">
+      <p>
+        The DatasetNeRF architecture unifies a pretrained EG3D model with a semantic segmentation branch, comprising an enhanced semantic tri-plane, a semantic feature decoder, and a semantic super-resolution module.  
+        The semantic feature tri-plane is constructed by reshaping the concatenated outputs from all synthesis blocks of the EG3D generator. 
+        The semantic feature decoder interprets aggregated features from semantic tri-plane into a 32-channel semantic feature for every point. 
+        The semantic feature map is rendered by semantic volumetric rendering. We incorporate a density prior from the pretrained RGB decoder during the rendering process to enhance 3D consistency. 
+        The semantic super-resolution module then upscales and refines the rendered semantic feature map into the final semantic output. 
+        The combination of the semantic mask output and the upsampled depth map from the pretrained EG3D model enables an efficient process for back-projecting the semantic mask, thereby facilitating the accurate generation of point cloud part segmentation.
+      </p>
+    </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <h2 class="title is-3">Visualization Results for Generated Data and Applications</h2>
+      <div id="teaser-video" class="teaser-video">
+        <video controls autoplay muted loop playsinline style="width: 100%; height: auto;">
+          <source src="./static/videos/3D-aware Data Factory.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{chi2023datasetnerfefficient3dawaredata,
+      title={DatasetNeRF: Efficient 3D-aware Data Factory with Generative Radiance Fields}, 
+      author={Yu Chi and Fangneng Zhan and Sibo Wu and Christian Theobalt and Adam Kortylewski},
+      year={2023},
+      eprint={2311.12063},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2311.12063}, }
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
