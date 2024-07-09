@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Pages
+      uses: actions/setup-pages@v1
+
+    - name: Build and deploy
+      run: |
+        mkdir -p public
+        cp -r * public
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./public
+
+    - name: Deploy to GitHub Pages
+      id: pages
+      uses: actions/deploy-pages@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
